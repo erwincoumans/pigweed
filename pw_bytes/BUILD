@@ -30,6 +30,7 @@ pw_cc_library(
     hdrs = [
         "public/pw_bytes/byte_builder.h",
         "public/pw_bytes/span.h",
+        "public/pw_bytes/endianness.h",
     ],
     includes = ["public"],
     deps = [

@@ -29,6 +29,7 @@ pw_source_set("pw_bytes") {
   public = [
     "public/pw_bytes/byte_builder.h",
     "public/pw_bytes/span.h",
+    "public/pw_bytes/endianness.h",
   ]
   sources = [ "byte_builder.cc" ]
   public_deps = [
