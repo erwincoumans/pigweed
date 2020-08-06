@@ -26,12 +26,13 @@ pw_cc_library(
     name = "pw_i2c",
     hdrs = [
         "public/pw_i2c/i2c_bus.h",
-        #"public/pw_i2c/i2c_device.h",
+        "public/pw_i2c/i2c_register_device.h",
     ],
     includes = ["public"],
     deps = [
         "//pw_preprocessor",
         "//pw_span",
         "//pw_bytes",
+        "//pw_assert",
     ],
 )

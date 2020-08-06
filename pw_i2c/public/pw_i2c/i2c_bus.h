@@ -15,6 +15,7 @@
 
 #include <cinttypes>
 #include <cstddef>
+
 #include "pw_bytes/span.h"
 #include "pw_status/status.h"
 
@@ -33,10 +34,34 @@ class I2cBus {
 
   virtual pw::Status Disable() = 0;
 
-  // TODO: A timeout or a deadline should be added here later
+  // Write bytes in tx_buffer to the I2C bus, the read rx_buffer.size() bytes
+  // from the bus. Only write if rx_buffer is empty; only read if tx_buffer
+  // is empty
+  //
+  // Effect on the wire of this API:
+  // 1) Generate start condition
+  // If tx_buffer non-empty:
+  //   2) output the address with R/W bit 0, must be ack'd
+  //   3) the write data where each byte must be ack'd
+  // If rx_buffer non-empty:
+  //   4) output the address with R/W bit 1, must be ack'd
+  //   5) device is expected to send the entire rx buffer's worth of bytes
+  //      where the master/controller must ack each and nack the last
+  // 6) Generate Stop condition
+  // TODO: A timeout or a deadline should be added to the API later
   virtual pw::Status WriteRead(I2cAddress address,
                                ConstByteSpan tx_buffer,
                                ByteSpan rx_buffer) = 0;
+
+  pw::Status Write(I2cAddress address, ConstByteSpan tx_buffer) {
+    ByteSpan empty_span{};
+    return WriteRead(address, tx_buffer, empty_span);
+  }
+
+  pw::Status Read(I2cAddress address, ByteSpan rx_buffer) {
+    ByteSpan empty_span{};
+    return WriteRead(address, empty_span, rx_buffer);
+  }
 };
 
-}
+}  // namespace pw::i2c

@@ -30,7 +30,7 @@ size_t GetIntSize(IntSize int_size) {
     return sizeof(uint16_t);
   } else if (int_size == IntSize::kUint32) {
     return sizeof(uint32_t);
-  } else if (int_size == IntSize::kUint64){
+  } else if (int_size == IntSize::kUint64) {
     return sizeof(uint64_t);
   } else {
     return 0;  // Indicate an error

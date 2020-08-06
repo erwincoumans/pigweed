@@ -25,7 +25,7 @@ pw_cc_library(
     name = "pw_i2c_baremetal_stm32f429",
     srcs = [
         "i2c_baremetal.cc",
-        "demo_app_main.cc"
+        "demo_app_main.cc",
     ],
     hdrs = [
         "public/pw_i2c_baremetal_stm32f429/i2c_baremetal.h",

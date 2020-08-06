@@ -13,6 +13,7 @@
 // the License.
 
 #include "pw_i2c_baremetal_stm32f429/i2c_baremetal.h"
+
 #include "pw_preprocessor/compiler.h"
 #include "pw_preprocessor/util.h"
 
